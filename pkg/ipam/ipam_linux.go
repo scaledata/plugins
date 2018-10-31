@@ -58,7 +58,7 @@ func ConfigureIface(ifName string, res *current.Result) error {
 			return fmt.Errorf("failed to add IP addr %v to %q: invalid interface index", ipc, ifName)
 		}
 
-		// Make sure sysctl "disable_ipv6" is 0 so we can get a
+                // Make sure sysctl "disable_ipv6" is 0 so we can get a
                 // link-local IPv6 address even if an IPv6 address
                 // range has not been explicitly chosen.
 		if !has_enabled_ipv6 {
