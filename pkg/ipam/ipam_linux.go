@@ -57,10 +57,11 @@ func ConfigureIface(ifName string, res *current.Result) error {
 			// IP address is for a different interface
 			return fmt.Errorf("failed to add IP addr %v to %q: invalid interface index", ipc, ifName)
 		}
-
-		// Make sure sysctl "disable_ipv6" is 0 if we are about to add
-		// an IPv6 address to the interface
-		if !has_enabled_ipv6 && ipc.Version == "6" {
+		
+		// Make sure sysctl "disable_ipv6" is 0 so we can get a
+		// link-local IPv6 address even if an IPv6 address
+		// range has not been explicitly chosen.
+		if !has_enabled_ipv6 {
 			// Enabled IPv6 for loopback "lo" and the interface
 			// being configured
 			for _, iface := range [2]string{"lo", ifName} {
